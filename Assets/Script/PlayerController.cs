@@ -15,10 +15,20 @@ public class PlayerController : MonoBehaviour
 
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
+
+    public static PlayerController Instance {get; private set;}
+
     private void Awake(){
         animator = GetComponent<Animator>();
+        Instance = this;
     }
-    private void Update()
+
+    public Vector3 getInteractPos() {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        return transform.position + facingDir;
+    }
+
+    public void HandleUpdate()
     {
         if (!isMoving)
         {
@@ -49,10 +59,7 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool("isMoving", isMoving);
 
-        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
-        var interactPos = transform.position + facingDir;
-
-        if (Physics2D.OverlapCircle(interactPos, 0.2f, interactableLayer) != null) {
+        if (Physics2D.OverlapCircle(getInteractPos(), 0.2f, interactableLayer) != null) {
             Interact();
         }
     }
