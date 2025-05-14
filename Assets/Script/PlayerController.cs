@@ -32,8 +32,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!isMoving)
         {
-            input.x = Input.GetAxisRaw("Horizontal");
-            input.y = Input.GetAxisRaw("Vertical");
+            #if UNITY_EDITOR
+                input.x = Input.GetAxisRaw("Horizontal");
+                input.y = Input.GetAxisRaw("Vertical");
+            #else
+                input = TouchInput.SwipeDirection;
+            #endif
 
             Debug.Log("This is input.x" + input.x);
             Debug.Log("This is input.y" + input.y);

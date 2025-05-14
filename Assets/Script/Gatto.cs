@@ -25,7 +25,7 @@ public class Gatto : MonoBehaviour
 
     var mosseCasuali = gattoStats.LearnableMoves
             .OrderBy(m => Random.value)
-            .Take(3);
+            .Take(4);
 
     foreach (var item in mosseCasuali)
     {
