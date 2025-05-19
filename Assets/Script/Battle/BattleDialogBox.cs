@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,6 @@ using UnityEngine.UI;
 public class BattleDialogBox : MonoBehaviour
 {
     [SerializeField] int lettersPerSecond;
-    [SerializeField] Color highlightedColor;
     [SerializeField] Text dialogText;
 
     [SerializeField] GameObject moveSelector;
@@ -46,6 +46,17 @@ public class BattleDialogBox : MonoBehaviour
                 moveTexts[i].text = moves[i].Base.name;
             else
                 moveTexts[i].text = "-";
+        }
+    }
+
+    public void UpdateMoveSelection(int currentMove)
+    {
+        for (int i = 0; i < moveTexts.Count; ++i)
+        {
+            if (i == currentMove)
+                moveTexts[i].color = Color.yellow;
+            else
+                moveTexts[i].color = Color.black;
         }
     }
 }

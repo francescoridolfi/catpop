@@ -16,4 +16,24 @@ public class MoveBase : ScriptableObject
  [SerializeField] int accuracy;
 
  
+    public int Power {
+        get { return power; }
+    }
+
+    public bool IsRegen {
+        get { return isRegen; }
+    }
+
+    public string Description {
+        get { return description; }
+    }
+
+    public string Name {
+        get { return name; }
+    }
+
+    public int Accuracy {
+        get { return accuracy; }
+    }
+
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 public class Gatto : MonoBehaviour
 {
     
-
   public GattoStats gattoStats { get; set; }
 
   public int HP { get; set; }
@@ -34,4 +33,30 @@ public class Gatto : MonoBehaviour
 
   }
 
+    public string Name {
+        get { return gattoStats.Name; }
+    }
+
+
+    public bool TakeDamage(Move move, Gatto attacker) {
+      if (move.Base.IsRegen)
+      {
+        return false;
+      }
+
+      float modifiers = Random.Range(0.85f, 1f);
+      float a = (2 * move.Base.Accuracy + 10 ) / 250f;
+      float d = a * move.Base.Power * ((float)attacker.gattoStats.Attack / gattoStats.Defense) + 2;
+      int damage = Mathf.FloorToInt(d * modifiers);
+
+      HP -= damage;
+      if (HP < 0)
+        HP = 0;
+
+      return HP == 0;
+    }
+
+    public Move GetRandomMove() {
+      return Moves[Random.Range(0, Moves.Count)];
+    }
 }
