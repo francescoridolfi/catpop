@@ -27,13 +27,13 @@ public class DialogManager : MonoBehaviour
         Instance = this; 
     }
 
-    public void HandleUpdate()
+    public IEnumerator HandleUpdate()
     {
         if(Physics2D.OverlapCircle(PlayerController.Instance.getInteractPos(), 0.2f, PlayerController.Instance.interactableLayer) != null && !isTyping){
             
             ++currentLine;
             if(currentLine < dialog.Lines.Count) {
-                StartCoroutine(TypeDialog(dialog.Lines[currentLine]));
+                yield return TypeDialog(dialog.Lines[currentLine]);
             } else {
                 dialogBox.SetActive(false);
                 OnHideDialog?.Invoke();
@@ -47,7 +47,7 @@ public class DialogManager : MonoBehaviour
         this.dialog = dialog;
         currentLine = 0;
         dialogBox.SetActive(true);
-        StartCoroutine(TypeDialog(dialog.Lines[0]));
+        yield return TypeDialog(dialog.Lines[0]);
     }
 
     public IEnumerator TypeDialog (string line)

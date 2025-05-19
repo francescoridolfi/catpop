@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -7,7 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
 
+    public event Action OnBattle;
     private bool isMoving;
+    public bool hasWin;
 
     private Vector2 input;
 
@@ -16,14 +19,16 @@ public class PlayerController : MonoBehaviour
     public LayerMask solidObjectsLayer;
     public LayerMask interactableLayer;
 
-    public static PlayerController Instance {get; private set;}
+    public static PlayerController Instance { get; private set; }
 
-    private void Awake(){
+    private void Awake()
+    {
         animator = GetComponent<Animator>();
         Instance = this;
     }
 
-    public Vector3 getInteractPos() {
+    public Vector3 getInteractPos()
+    {
         var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         return transform.position + facingDir;
     }
@@ -55,16 +60,17 @@ public class PlayerController : MonoBehaviour
                 targetPos.x += input.x;
                 targetPos.y += input.y;
 
-                if(isWalkable(targetPos))
-                StartCoroutine(Move(targetPos));
+                if (isWalkable(targetPos))
+                    StartCoroutine(Move(targetPos));
             }
 
         }
 
         animator.SetBool("isMoving", isMoving);
 
-        if (Physics2D.OverlapCircle(getInteractPos(), 0.2f, interactableLayer) != null) {
-            Interact();
+        if (Physics2D.OverlapCircle(getInteractPos(), 0.2f, interactableLayer) != null)
+        {
+            StartCoroutine(Interact());
         }
     }
 
@@ -82,12 +88,13 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    private bool isWalkable(Vector3 targetPos){
+    private bool isWalkable(Vector3 targetPos)
+    {
         return !(Physics2D.OverlapCircle(targetPos, 0.2f, solidObjectsLayer | interactableLayer) != null);
     }
 
 
-    void Interact()
+    IEnumerator Interact()
     {
         var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
         var interactPos = transform.position + facingDir;
@@ -97,8 +104,20 @@ public class PlayerController : MonoBehaviour
         var collider = Physics2D.OverlapCircle(interactPos, 0.2f, interactableLayer);
         if (collider != null)
         {
-           collider.GetComponent<Interactable>()?.Interact();
+            if (hasWin)
+            {
+                collider.gameObject.SetActive(false);
+                hasWin = false;
+            }
+            else
+            {
+                yield return collider.GetComponent<Interactable>()?.Interact();
+                yield return new WaitForSeconds(0.2f);
+                OnBattle?.Invoke();
+            }
         }
     }    
 
+
+    
 }

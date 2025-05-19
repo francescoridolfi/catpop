@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy}
 
@@ -14,6 +15,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleHud enemyHud;
 
     [SerializeField] BattleDialogBox dialogBox;
+
+    public event Action<bool> OnBattleOver;
 
     BattleState state;
     int currentMove;
@@ -40,7 +43,7 @@ public class BattleSystem : MonoBehaviour
 
         dialogBox.SetMoveNames(playerUnit.gatto.Moves);
     }
-    private void Update()
+    public void HandleUpdate()
     {
         if(state == BattleState.PlayerMove)
         {
@@ -81,9 +84,13 @@ public class BattleSystem : MonoBehaviour
         }
         yield return playerHud.UpdateHP();
         yield return enemyHud.UpdateHP();
-        if (isFainted) {
+        if (isFainted)
+        {
             yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} fainted");
             enemyUnit.PlayFaintAnimation();
+
+            yield return new WaitForSeconds(2f);
+            OnBattleOver(true);
         }
         else
         {
@@ -114,9 +121,13 @@ public class BattleSystem : MonoBehaviour
 
         yield return playerHud.UpdateHP();
         yield return enemyHud.UpdateHP();
-        if(isFainted) {
+        if (isFainted)
+        {
             yield return dialogBox.TypeDialog("You loose (Emanuela Orlandi ti osserva)");
             playerUnit.PlayFaintAnimation();
+            
+            yield return new WaitForSeconds(2f);
+            OnBattleOver(false);
         }
         else
         {

@@ -6,8 +6,8 @@ public class NPCController : MonoBehaviour, Interactable
 {
 
     [SerializeField] Dialog dialog;
-    public void Interact()
+    public IEnumerator Interact()
     {
-       StartCoroutine(DialogManager.Instance.ShowDialog(dialog));
+        yield return DialogManager.Instance.ShowDialog(dialog);
     }
 }
