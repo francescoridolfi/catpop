@@ -1,3 +1,5 @@
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +15,8 @@ public class GameController : MonoBehaviour
 
         [SerializeField] Canvas worldDialogBox;
         GameState state;
+        
+        
 
     public void Start()
     {
@@ -33,11 +37,14 @@ public class GameController : MonoBehaviour
            }
        }
            ;
-        playerController.OnBattle += () =>
+        playerController.OnBattle += (GattoStats gattoStats) =>
         {
+            Debug.Log($"Start Battle with {gattoStats}");
+            
+            battleSystem.enemyGattoStats = gattoStats;
             StartBattle();
         };
-        
+
         battleSystem.OnBattleOver += (isOver) =>
         {
             if (isOver)
@@ -57,6 +64,7 @@ public class GameController : MonoBehaviour
         battleSystem.gameObject.SetActive(true);
         worldCamera.gameObject.SetActive(false);
         worldDialogBox.gameObject.SetActive(false);
+        battleSystem.Start();
     }
 
     private void Update()

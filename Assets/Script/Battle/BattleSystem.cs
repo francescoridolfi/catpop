@@ -18,10 +18,13 @@ public class BattleSystem : MonoBehaviour
 
     public event Action<bool> OnBattleOver;
 
+    public GattoStats enemyGattoStats;
+
     BattleState state;
     int currentMove;
-    private void Start()
+    public void Start()
     {
+        enemyUnit.gattoStats = enemyGattoStats; 
         StartCoroutine (SetUpBattle());
     }
 

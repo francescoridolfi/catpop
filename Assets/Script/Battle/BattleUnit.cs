@@ -7,10 +7,10 @@ using DG.Tweening;
 
 public class BattleUnit : MonoBehaviour
 {
-    [SerializeField] GattoStats gattoStats;
+    public GattoStats gattoStats { get; set; }
     [SerializeField] bool isPlayerUnit;
-    
-    public Gatto gatto { get; set;}
+
+    public Gatto gatto { get; set; }
 
     Image image;
     Vector3 originalPos;
@@ -20,25 +20,34 @@ public class BattleUnit : MonoBehaviour
     private void Awake()
     {
         image = GetComponent<Image>();
-        originalPos = image.transform.localPosition;
+        
+        if (isPlayerUnit)
+            originalPos = new Vector3(-273f, -34f);
+        else
+            originalPos = new Vector3(196.15f, 30f);
+        //originalPos = image.transform.localPosition;
         originalColor = image.color;
     }
 
     public void Setup()
     {
+        if (isPlayerUnit)
+            gattoStats = PlayerController.Instance.gattoStats;
+
         gatto = new Gatto(gattoStats);
-        
+
         image.sprite = gatto.gattoStats.FrontSprite;
-        PlayEnterAnimation();       
+        PlayEnterAnimation();
     }
 
     public void PlayEnterAnimation()
     {
+        image.DOFade(1f, 0.5f);
         if (isPlayerUnit)
             image.transform.localPosition = new Vector3(-500f, originalPos.y);
         else
             image.transform.localPosition = new Vector3(500f, originalPos.y);
-        
+
         image.transform.DOLocalMoveX(originalPos.x, 1f).SetEase(Ease.OutBack);
     }
 
@@ -67,4 +76,5 @@ public class BattleUnit : MonoBehaviour
         sequence.Append(image.transform.DOLocalMoveY(originalPos.y - 150f, 0.5f));
         sequence.Join(image.DOFade(0f, 0.5f));
     }
+    
 }

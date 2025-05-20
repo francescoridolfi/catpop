@@ -7,7 +7,7 @@ using UnityEngine;
 public class GattoStats : ScriptableObject
 {
 
-  [SerializeField] string name;
+  [SerializeField] string _name;
   
   [SerializeField] Sprite frontSprite;
 
@@ -24,7 +24,7 @@ public class GattoStats : ScriptableObject
 
 
   public string Name {
-    get { return name; }
+    get { return _name; }
   }
 
 

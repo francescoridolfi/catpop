@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] public GattoStats gattoStats;
+
     public float moveSpeed;
 
-    public event Action OnBattle;
+    public event Action<GattoStats> OnBattle;
     private bool isMoving;
     public bool hasWin;
 
@@ -113,7 +115,10 @@ public class PlayerController : MonoBehaviour
             {
                 yield return collider.GetComponent<Interactable>()?.Interact();
                 yield return new WaitForSeconds(0.2f);
-                OnBattle?.Invoke();
+                
+                Debug.Log($"Encountered {collider.GetComponent<Interactable>()?.GetGattoStats().Name}");
+
+                OnBattle?.Invoke(collider.GetComponent<Interactable>()?.GetGattoStats());
             }
         }
     }    

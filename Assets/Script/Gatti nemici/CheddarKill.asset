@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a66d33928d5cfaa40b96ababe8038b24, type: 3}
+  m_Name: CheddarKill
+  m_EditorClassIdentifier: 
+  _name: CheddarKill
+  frontSprite: {fileID: 1324512134, guid: 475f9453c8685a740a3a7897e395c32e, type: 3}
+  maxHp: 100
+  attack: 100
+  defense: 100
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 91a194f21f6c4c345b03406ffd6fcf60, type: 2}
+  - moveBase: {fileID: 11400000, guid: 2dce027f3c7c628478e81e5cabb22b4c, type: 2}
+  - moveBase: {fileID: 11400000, guid: 7a8b6e9bcff260b48b80d6dd16c40e68, type: 2}
+  - moveBase: {fileID: 11400000, guid: 642ccbf89e57c4e4b9c701ea6ab73263, type: 2}
