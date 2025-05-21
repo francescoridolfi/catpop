@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Sovraccarico Nucleare
   description: 
-  power: 0
+  power: 1000
   isRegen: 0
   accuracy: 0

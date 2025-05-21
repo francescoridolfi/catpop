@@ -37,10 +37,10 @@ public class BattleSystem : MonoBehaviour
 
         
 
-        yield return (dialogBox.TypeDialog($"A wild {enemyUnit.gatto.gattoStats.Name} appeared"));
+        yield return (dialogBox.TypeDialog($"Il micio {enemyUnit.gatto.gattoStats.Name} scende in campo!"));
         yield return new WaitForSeconds(1f);
         PlayerMove();
-        StartCoroutine (dialogBox.TypeDialog("Choose and action"));
+        StartCoroutine (dialogBox.TypeDialog("Ora cosa farai?"));
         yield return new WaitForSeconds(1f);
         StartCoroutine (dialogBox.TypeDialog(""));
 
@@ -67,7 +67,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator PerformPlayerMove()
     {
         var move = playerUnit.gatto.Moves[currentMove];
-        yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} used {move.Base.name}");
+        yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} usa {move.Base.name}");
 
         yield return new WaitForSeconds(1f);
 
@@ -89,7 +89,7 @@ public class BattleSystem : MonoBehaviour
         yield return enemyHud.UpdateHP();
         if (isFainted)
         {
-            yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} fainted");
+            yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} ti ha ridato la tua vita!");
             enemyUnit.PlayFaintAnimation();
 
             yield return new WaitForSeconds(2f);
@@ -104,7 +104,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyMove() {
         state = BattleState.EnemyMove;
         var move = enemyUnit.gatto.GetRandomMove();
-        yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} used {move.Base.name}");
+        yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} usa {move.Base.name}");
         yield return new WaitForSeconds(1f);
 
         if (!move.Base.IsRegen) {
@@ -126,7 +126,7 @@ public class BattleSystem : MonoBehaviour
         yield return enemyHud.UpdateHP();
         if (isFainted)
         {
-            yield return dialogBox.TypeDialog("You loose (Emanuela Orlandi ti osserva)");
+            yield return dialogBox.TypeDialog("Ritenta... sarai piu fortunato!");
             playerUnit.PlayFaintAnimation();
             
             yield return new WaitForSeconds(2f);

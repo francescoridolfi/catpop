@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             if (hasWin)
             {
+                Debug.Log($"I've win the battle, i'm going to deactivate the collider {collider.gameObject.name}");
                 collider.gameObject.SetActive(false);
                 hasWin = false;
             }
