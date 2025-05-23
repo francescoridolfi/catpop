@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class MoveBase : ScriptableObject
 {
- [SerializeField] string name;
+ [SerializeField] string _name;
 
  [TextArea] 
  [SerializeField] string description;
@@ -29,7 +29,7 @@ public class MoveBase : ScriptableObject
     }
 
     public string Name {
-        get { return name; }
+        get { return _name; }
     }
 
     public int Accuracy {

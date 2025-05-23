@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +15,7 @@ public class GattoStats : ScriptableObject
   [SerializeField] int maxHp;
   [SerializeField] int attack;
   [SerializeField] int defense;
+
 
   [SerializeField] List<LearnableMove> learnableMoves;
 
