@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc4ea8e68d9cf74b910dfd111612262, type: 3}
   m_Name: Raggio Distrattore
   m_EditorClassIdentifier: 
-  name: Raggio Distrattore
+  _name: 
   description: 
-  power: 1000
+  power: 100
   isRegen: 0
-  accuracy: 0
+  accuracy: 100
+  image: {fileID: 0}

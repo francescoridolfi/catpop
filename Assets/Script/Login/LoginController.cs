@@ -53,7 +53,9 @@ public class LoginController : MonoBehaviour
 
             playerProfile.playerInfo = playerInfo;
             playerProfile.Name = name;
-
+            PlayerPrefs.SetString("PlayerName", name);
+            PlayerPrefs.SetInt("isSignedIn", 1);
+            
             OnSignedIn?.Invoke(playerProfile);
         }
         catch (AuthenticationException ex)

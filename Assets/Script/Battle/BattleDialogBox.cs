@@ -12,11 +12,9 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] GameObject moveSelector;
 
     [SerializeField] List<Button> moveButtons;
-    /*
-    [SerializeField] List<Text> moveTexts;
 
-    [SerializeField] List<RawImage> images;
-    */
+    private bool isWriting = false;
+
     public void SetDialog(string dialog)
     {
         dialogText.text = dialog;
@@ -24,12 +22,15 @@ public class BattleDialogBox : MonoBehaviour
 
     public IEnumerator TypeDialog(string dialog)
     {
+        if (isWriting) yield break;
+        isWriting = true;
         dialogText.text = "";
         foreach (var letter in dialog.ToCharArray())
         {
             dialogText.text += letter;
-            yield return new WaitForSeconds(1f/lettersPerSecond);
+            yield return new WaitForSeconds(1f / lettersPerSecond);
         }
+        isWriting = false;
     }
 
     public void EnableDialogText(bool enabled)

@@ -77,15 +77,21 @@ public class BattleSystem : MonoBehaviour
         
 
     }
-    
+    private bool isPerformingAction = false;
     IEnumerator PerformPlayerMove()
     {
+
+        if (isPerformingAction)
+            yield break;
+
+        isPerformingAction = true;
         var move = playerUnit.gatto.Moves[currentMove];
         yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} usa {move.Base.name}");
 
         yield return new WaitForSeconds(1f);
 
-        if(!move.Base.IsRegen) {
+        if (!move.Base.IsRegen)
+        {
             playerUnit.PlayAttackAnimation();
             yield return new WaitForSeconds(1f);
 
@@ -93,7 +99,7 @@ public class BattleSystem : MonoBehaviour
         }
 
         bool isFainted = enemyUnit.gatto.TakeDamage(move, playerUnit.gatto);
-        if(move.Base.IsRegen)
+        if (move.Base.IsRegen)
         {
             playerUnit.gatto.HP += move.Base.Power;
             if (playerUnit.gatto.HP > playerUnit.gatto.MaxHp)
@@ -113,6 +119,7 @@ public class BattleSystem : MonoBehaviour
         {
             StartCoroutine(EnemyMove());
         }
+        isPerformingAction = false;
     }
 
     IEnumerator EnemyMove() {

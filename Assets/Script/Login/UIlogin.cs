@@ -18,6 +18,12 @@ public class UILogin : MonoBehaviour
 
     private void OnEnable()
     {
+        if (PlayerPrefs.GetInt("isSignedIn", 0) == 1)
+        {
+            loginPanel.gameObject.SetActive(false);
+            userPanel.gameObject.SetActive(true);
+            userNameText.text = PlayerPrefs.GetString("PlayerName", "Guest");
+        }
         loginButton.onClick.AddListener(LoginButtonPressed);
         loginController.OnSignedIn += LoginController_OnSignedIn;
         loginController.OnAvatarUpdate += LoginController_OnAvatarUpdate;
