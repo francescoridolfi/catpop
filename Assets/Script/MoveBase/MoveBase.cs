@@ -15,8 +15,16 @@ public class MoveBase : ScriptableObject
  [SerializeField] bool isRegen;
  [SerializeField] int accuracy;
 
+ [SerializeField] Texture image;
+
  
-    public int Power {
+    public Texture Image
+    {
+        get { return image; }
+    }
+
+    public int Power
+    {
         get { return power; }
     }
 

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc4ea8e68d9cf74b910dfd111612262, type: 3}
   m_Name: Riposino
   m_EditorClassIdentifier: 
-  name: Riposino
+  _name: Riposino
   description: ZzzzzZzzz...
   power: 30
   isRegen: 1
   accuracy: 100
+  image: {fileID: 2800000, guid: 975572c3f63921f4db80acd16c9f358b, type: 3}

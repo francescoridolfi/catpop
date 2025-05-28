@@ -11,11 +11,15 @@ public class BattleDialogBox : MonoBehaviour
 
     [SerializeField] GameObject moveSelector;
 
+    [SerializeField] List<Button> moveButtons;
+    /*
     [SerializeField] List<Text> moveTexts;
 
-    public void SetDialog (string dialog)
+    [SerializeField] List<RawImage> images;
+    */
+    public void SetDialog(string dialog)
     {
-        dialogText.text=dialog;
+        dialogText.text = dialog;
     }
 
     public IEnumerator TypeDialog(string dialog)
@@ -38,25 +42,38 @@ public class BattleDialogBox : MonoBehaviour
         moveSelector.SetActive(enabled);
     }
 
+    public void ConfigureButtonCallback(Action<int> callback)
+    {
+        for (int i = 0; i < moveButtons.Count; i++)
+        {
+            int index = i; 
+            moveButtons[i].onClick.AddListener(() => callback(index));
+        }
+    }
+
     public void SetMoveNames(List<Move> moves)
     {
-        for (int i=0; i<moveTexts.Count; i++)
+        for (int i = 0; i < moveButtons.Count; i++)
         {
             if (i < moves.Count)
-                moveTexts[i].text = moves[i].Base.name;
+            {
+                moveButtons[i].GetComponentInChildren<Text>().text = moves[i].Base.Name;
+                moveButtons[i].GetComponentInChildren<RawImage>().color = Color.white;
+                moveButtons[i].GetComponentInChildren<RawImage>().texture = moves[i].Base.Image;
+            }
             else
-                moveTexts[i].text = "-";
+                moveButtons[i].GetComponentInChildren<Text>().text = "-";
         }
     }
 
     public void UpdateMoveSelection(int currentMove)
     {
-        for (int i = 0; i < moveTexts.Count; ++i)
+        for (int i = 0; i < moveButtons.Count; ++i)
         {
             if (i == currentMove)
-                moveTexts[i].color = Color.yellow;
+                moveButtons[i].GetComponentInChildren<Text>().color = Color.yellow;
             else
-                moveTexts[i].color = Color.black;
+                moveButtons[i].GetComponentInChildren<Text>().color = Color.black;
         }
     }
 }

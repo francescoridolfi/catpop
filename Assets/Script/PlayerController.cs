@@ -65,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
         if (Physics2D.OverlapCircle(getInteractPos(), 0.2f, interactableLayer) != null)
         {
+            isMoving = false;
+            animator.SetBool("isMoving", isMoving);
             StartCoroutine(Interact());
         }
     }

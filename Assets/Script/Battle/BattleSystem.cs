@@ -35,16 +35,29 @@ public class BattleSystem : MonoBehaviour
         playerHud.SetData(playerUnit.gatto);
         enemyHud.SetData(enemyUnit.gatto);
 
-        
+
 
         yield return (dialogBox.TypeDialog($"Il micio {enemyUnit.gatto.gattoStats.Name} scende in campo!"));
         yield return new WaitForSeconds(1f);
         PlayerMove();
-        StartCoroutine (dialogBox.TypeDialog("Ora cosa farai?"));
+        StartCoroutine(dialogBox.TypeDialog("Ora cosa farai?"));
         yield return new WaitForSeconds(1f);
-        StartCoroutine (dialogBox.TypeDialog(""));
+        StartCoroutine(dialogBox.TypeDialog(""));
 
         dialogBox.SetMoveNames(playerUnit.gatto.Moves);
+        dialogBox.ConfigureButtonCallback((int moveIndex) =>
+        {
+            if (moveIndex >= playerUnit.gatto.Moves.Count)
+                return;
+
+            currentMove = moveIndex;
+
+            dialogBox.UpdateMoveSelection(currentMove);
+            dialogBox.EnableMoveSelector(false);
+            dialogBox.EnableDialogText(true);
+
+            StartCoroutine(PerformPlayerMove());
+         });
     }
     public void HandleUpdate()
     {
@@ -56,11 +69,12 @@ public class BattleSystem : MonoBehaviour
 
 
 
-    void PlayerMove() 
+    void PlayerMove()
     {
         state = BattleState.PlayerMove;
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(true);
+        
 
     }
     
@@ -138,37 +152,11 @@ public class BattleSystem : MonoBehaviour
         }
     }
    
-    void HandleMoveSelection()
+    void HandleMoveSelection()    
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (currentMove < playerUnit.gatto.Moves.Count - 1)
-                ++currentMove;
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (currentMove > 0)
-                --currentMove;
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            if (currentMove < playerUnit.gatto.Moves.Count - 2)
-                currentMove += 2;
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (currentMove > 1)
-                currentMove -= 2;
-        }
 
-        dialogBox.UpdateMoveSelection(currentMove);
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            dialogBox.EnableMoveSelector(false);
-            dialogBox.EnableDialogText(true);
-            StartCoroutine(PerformPlayerMove());
-        }
+        
+        
 
     }
 

@@ -19,9 +19,9 @@ public class BattleUnit : MonoBehaviour
         image = GetComponent<Image>();
 
         if (isPlayerUnit)
-            originalPos = new Vector3(-273f, -34f);
+            originalPos = new Vector3(-290f, -4.3905f);
         else
-            originalPos = new Vector3(196.15f, 30f);
+            originalPos = new Vector3(315f, -4.6855f);
         //originalPos = image.transform.localPosition;
         originalColor = image.color;
     }
