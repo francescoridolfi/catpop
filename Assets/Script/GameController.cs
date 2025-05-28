@@ -13,7 +13,9 @@ public class GameController : MonoBehaviour
 
         [SerializeField] Camera worldCamera;
 
-        [SerializeField] Canvas worldDialogBox;
+        [SerializeField] GameObject worldDialogBox;
+
+        [SerializeField] GameObject joyStick;
         GameState state;
         
         
@@ -26,6 +28,7 @@ public class GameController : MonoBehaviour
         {
             state = GameState.Dialog;
             worldDialogBox.gameObject.SetActive(true);
+            joyStick.gameObject.SetActive(false);
         };
 
         DialogManager.Instance.OnHideDialog += () =>
@@ -34,6 +37,7 @@ public class GameController : MonoBehaviour
            {
                state = GameState.FreeRoam;
                worldDialogBox.gameObject.SetActive(false);
+               joyStick.gameObject.SetActive(true);
            }
        }
            ;
@@ -42,6 +46,7 @@ public class GameController : MonoBehaviour
             Debug.Log($"Start Battle with {gattoStats}");
             
             battleSystem.enemyGattoStats = gattoStats;
+            joyStick.gameObject.SetActive(false);
             StartBattle();
         };
 
@@ -53,6 +58,7 @@ public class GameController : MonoBehaviour
                 battleSystem.gameObject.SetActive(false);
                 worldCamera.gameObject.SetActive(true);
                 worldDialogBox.gameObject.SetActive(false);
+                joyStick.gameObject.SetActive(true);
                 playerController.hasWin = true;
             }
         };

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,21 +34,15 @@ public class PlayerController : MonoBehaviour
         return transform.position + facingDir;
     }
 
+    public void InputPlayer(InputAction.CallbackContext _context)
+    {
+        input = _context.ReadValue<Vector2>();
+    } 
+
     public void HandleUpdate()
     {
         if (!isMoving)
-        {
-            #if UNITY_EDITOR
-                input.x = Input.GetAxisRaw("Horizontal");
-                input.y = Input.GetAxisRaw("Vertical");
-            #else
-                input = TouchInput.SwipeDirection;
-            #endif
-
-            Debug.Log("This is input.x" + input.x);
-            Debug.Log("This is input.y" + input.y);
-
-            if (input.x != 0) input.y = 0;
+        {   
 
             if (input != Vector2.zero)
             {
@@ -114,12 +109,15 @@ public class PlayerController : MonoBehaviour
             {
                 yield return collider.GetComponent<Interactable>()?.Interact();
                 yield return new WaitForSeconds(0.2f);
-                
+
                 Debug.Log($"Encountered {collider.GetComponent<Interactable>()?.GetGattoStats().Name}");
 
                 OnBattle?.Invoke(collider.GetComponent<Interactable>()?.GetGattoStats());
             }
         }
+        
+        
+        
     }    
 
 
