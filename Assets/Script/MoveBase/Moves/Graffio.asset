@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Graffio
   m_EditorClassIdentifier: 
   _name: Graffio
-  description: Graffia il nemico
-  power: 300
-  isRegen: 0
+  description: Meowwwwwwwww
+  power: 800
+  moveType: 1
   accuracy: 100
   image: {fileID: 2800000, guid: e4544aa3907878e4591a66b5e64a813d, type: 3}

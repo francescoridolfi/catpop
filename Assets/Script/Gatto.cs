@@ -14,6 +14,18 @@ public class Gatto : MonoBehaviour
     get { return this.gattoStats.MaxHp; }
   }
 
+  public int Attack
+  {
+    get { return this.gattoStats.Attack; }
+    set { this.gattoStats.Attack = value; }
+  }
+
+  public int Defense
+  {
+    get { return this.gattoStats.Defense; }
+    set { this.gattoStats.Defense = value; }
+  }
+
   public List<Move> Moves { get; set; }
 
   public Gatto(GattoStats gattoStats) {
@@ -38,7 +50,7 @@ public class Gatto : MonoBehaviour
 
 
     public bool TakeDamage(Move move, Gatto attacker) {
-      if (move.Base.IsRegen)
+      if (!move.Base.IsAttack)
       {
         return false;
       }

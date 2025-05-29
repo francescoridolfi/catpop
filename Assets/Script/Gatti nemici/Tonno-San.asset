@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Tonno-San
   frontSprite: {fileID: 1523016208, guid: e08b56a30d761d44faf48029408e350a, type: 3}
-  maxHp: 100
-  attack: 100
-  defense: 100
+  maxHp: 250
+  attack: 70
+  defense: 60
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: d19137afd80a53c4bb586da04fbe119e, type: 2}
   - moveBase: {fileID: 11400000, guid: 2dce027f3c7c628478e81e5cabb22b4c, type: 2}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ErbaGatta
   m_EditorClassIdentifier: 
   _name: Erba Gatta
-  description: Bleah
-  power: 50
-  isRegen: 0
-  accuracy: 50
+  description: Gnam Gnam
+  power: 20
+  moveType: 3
+  accuracy: 0
   image: {fileID: 2800000, guid: 7e161691e7460ca45b660d159464d3dd, type: 3}

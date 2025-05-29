@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: ZampaLunga
   frontSprite: {fileID: 2124621765, guid: 1298d2f06dedf154a9b87102919ea0b3, type: 3}
-  maxHp: 100
-  attack: 100
-  defense: 100
+  maxHp: 180
+  attack: 80
+  defense: 50
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 3add8125751e33345aa82514da15b820, type: 2}
   - moveBase: {fileID: 11400000, guid: 62e6f951ce1305448bcd99aa6d1ab910, type: 2}

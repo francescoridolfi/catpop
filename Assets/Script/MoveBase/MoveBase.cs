@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Move", menuName = "GATTO/ Create new Move")]
 
+public enum MoveType { REGEN, ATTACK, DEFENSE_BOOST, ATTACK_BOOST }
+
+
+[CreateAssetMenu(fileName = "Move", menuName = "GATTO/ Create new Move")]
 public class MoveBase : ScriptableObject
 {
- [SerializeField] string _name;
+    [SerializeField] string _name;
 
- [TextArea] 
- [SerializeField] string description;
- [SerializeField] int power;
+    [TextArea]
+    [SerializeField] string description;
+    [SerializeField] int power;
 
- [SerializeField] bool isRegen;
- [SerializeField] int accuracy;
+    [SerializeField] MoveType moveType;
+    [SerializeField] int accuracy;
 
- [SerializeField] Texture image;
+    [SerializeField] Texture image;
 
- 
+
     public Texture Image
     {
         get { return image; }
@@ -28,19 +31,28 @@ public class MoveBase : ScriptableObject
         get { return power; }
     }
 
-    public bool IsRegen {
-        get { return isRegen; }
+    public bool IsAttack
+    {
+        get { return moveType == MoveType.ATTACK; }
     }
 
-    public string Description {
+    public MoveType MoveType
+    {
+        get { return moveType; }
+    }
+
+    public string Description
+    {
         get { return description; }
     }
 
-    public string Name {
+    public string Name
+    {
         get { return _name; }
     }
 
-    public int Accuracy {
+    public int Accuracy
+    {
         get { return accuracy; }
     }
 

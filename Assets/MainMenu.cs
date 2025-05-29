@@ -28,6 +28,18 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Logout()
+    {
+        PlayerPrefs.DeleteKey("isSignedIn");
+        PlayerPrefs.DeleteKey("PlayerName");
+        SceneManager.LoadScene(0);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void QuitGame()
     {
         Debug.Log("QUIT");

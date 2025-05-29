@@ -90,21 +90,40 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        if (!move.Base.IsRegen)
+        if (move.Base.Description != "")
         {
-            playerUnit.PlayAttackAnimation();
+            yield return dialogBox.TypeDialog(move.Base.Description);
             yield return new WaitForSeconds(1f);
-
-            enemyUnit.PlayHitAnimation();
         }
+
+        if (move.Base.IsAttack)
+            {
+                playerUnit.PlayAttackAnimation();
+                yield return new WaitForSeconds(1f);
+
+                enemyUnit.PlayHitAnimation();
+            }
 
         bool isFainted = enemyUnit.gatto.TakeDamage(move, playerUnit.gatto);
-        if (move.Base.IsRegen)
+
+        switch (move.Base.MoveType)
         {
-            playerUnit.gatto.HP += move.Base.Power;
-            if (playerUnit.gatto.HP > playerUnit.gatto.MaxHp)
-                playerUnit.gatto.HP = playerUnit.gatto.MaxHp;
+            case MoveType.ATTACK_BOOST:
+                playerUnit.gatto.Attack += (int) ((float) move.Base.Power / 100 * playerUnit.gatto.Attack);
+                yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} ha aumentato il suo attacco!");
+                break;
+            case MoveType.DEFENSE_BOOST:
+                playerUnit.gatto.Defense += (int) ((float) move.Base.Power / 100 * playerUnit.gatto.Defense);
+                yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} ha aumentato la sua difesa!");
+                break;
+            case MoveType.REGEN:
+                playerUnit.gatto.HP += (int) ((float) move.Base.Power / 100 * playerUnit.gatto.HP);
+                if (playerUnit.gatto.HP > playerUnit.gatto.MaxHp)
+                    playerUnit.gatto.HP = playerUnit.gatto.MaxHp;
+                yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} si è rigenerato!");
+                break;
         }
+
         yield return playerHud.UpdateHP();
         yield return enemyHud.UpdateHP();
         if (isFainted)
@@ -128,7 +147,7 @@ public class BattleSystem : MonoBehaviour
         yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} usa {move.Base.name}");
         yield return new WaitForSeconds(1f);
 
-        if (!move.Base.IsRegen) {
+        if (move.Base.IsAttack) {
             enemyUnit.PlayAttackAnimation();
             yield return new WaitForSeconds(1f);
 
@@ -136,11 +155,23 @@ public class BattleSystem : MonoBehaviour
         }
 
         bool isFainted = playerUnit.gatto.TakeDamage(move, enemyUnit.gatto);
-        if (move.Base.IsRegen)
+
+        switch (move.Base.MoveType)
         {
-            enemyUnit.gatto.HP += move.Base.Power;
-            if (enemyUnit.gatto.HP > enemyUnit.gatto.MaxHp)
-                enemyUnit.gatto.HP = enemyUnit.gatto.MaxHp;
+            case MoveType.ATTACK_BOOST:
+                enemyUnit.gatto.Attack += (int) ((float) move.Base.Power / 100 * enemyUnit.gatto.Attack);
+                yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} ha aumentato il suo attacco!");
+                break;
+            case MoveType.DEFENSE_BOOST:
+                enemyUnit.gatto.Defense += (int) ((float) move.Base.Power / 100 * enemyUnit.gatto.Defense);
+                yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} ha aumentato la sua difesa!");
+                break;
+            case MoveType.REGEN:
+                enemyUnit.gatto.HP += (int) ((float) move.Base.Power / 100 * enemyUnit.gatto.HP);
+                if (enemyUnit.gatto.HP > enemyUnit.gatto.MaxHp)
+                    enemyUnit.gatto.HP = enemyUnit.gatto.MaxHp;
+                yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} si è rigenerato!");
+                break;
         }
 
         yield return playerHud.UpdateHP();

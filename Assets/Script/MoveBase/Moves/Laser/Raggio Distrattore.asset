@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: 
   description: 
-  power: 100
-  isRegen: 0
+  power: 70
+  moveType: 1
   accuracy: 100
   image: {fileID: 0}

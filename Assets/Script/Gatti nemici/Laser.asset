@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Laser
   frontSprite: {fileID: 1523016208, guid: e08b56a30d761d44faf48029408e350a, type: 3}
-  maxHp: 100
-  attack: 100
-  defense: 100
+  maxHp: 200
+  attack: 60
+  defense: 50
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 6a9a86ab6cdf04b4b8de6b4d25302c5f, type: 2}
   - moveBase: {fileID: 11400000, guid: 91a194f21f6c4c345b03406ffd6fcf60, type: 2}

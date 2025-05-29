@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc4ea8e68d9cf74b910dfd111612262, type: 3}
   m_Name: Taglio in Scatola
   m_EditorClassIdentifier: 
-  name: Taglio in Scatola
+  _name: 
   description: 
-  power: 0
-  isRegen: 0
-  accuracy: 0
+  power: 95
+  moveType: 1
+  accuracy: 85
+  image: {fileID: 0}

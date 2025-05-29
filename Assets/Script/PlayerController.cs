@@ -91,6 +91,25 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public bool hasNearbyInteractable()
+    {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
+        var collider = Physics2D.OverlapCircle(interactPos, 300f, interactableLayer);
+        return collider != null && collider.GetComponent<Interactable>() != null;
+    }
+
+    public void EnemyDefeated()
+    {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
+
+        //Debug.DrawLine(transform.position, interactPos, Color.red, 1f);
+
+        var collider = Physics2D.OverlapCircle(interactPos, 0.2f, interactableLayer);
+        collider.gameObject.SetActive(false);
+    }
+
     IEnumerator Interact()
     {
         var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
@@ -101,21 +120,12 @@ public class PlayerController : MonoBehaviour
         var collider = Physics2D.OverlapCircle(interactPos, 0.2f, interactableLayer);
         if (collider != null)
         {
-            if (hasWin)
-            {
-                Debug.Log($"I've win the battle, i'm going to deactivate the collider {collider.gameObject.name}");
-                collider.gameObject.SetActive(false);
-                hasWin = false;
-            }
-            else
-            {
-                yield return collider.GetComponent<Interactable>()?.Interact();
-                yield return new WaitForSeconds(0.2f);
+            yield return collider.GetComponent<Interactable>()?.Interact();
+            yield return new WaitForSeconds(0.2f);
 
-                Debug.Log($"Encountered {collider.GetComponent<Interactable>()?.GetGattoStats().Name}");
+            Debug.Log($"Encountered {collider.GetComponent<Interactable>()?.GetGattoStats().Name}");
 
-                OnBattle?.Invoke(collider.GetComponent<Interactable>()?.GetGattoStats());
-            }
+            OnBattle?.Invoke(collider.GetComponent<Interactable>()?.GetGattoStats());
         }
         
         

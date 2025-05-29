@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Gomitolo
   frontSprite: {fileID: 197355823, guid: cb3bcf6afed26874e80f2a1c118ed62a, type: 3}
-  maxHp: 100
-  attack: 100
-  defense: 100
+  maxHp: 210
+  attack: 55
+  defense: 60
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 25996704d36adb846837a07947fce16f, type: 2}
   - moveBase: {fileID: 11400000, guid: 91a194f21f6c4c345b03406ffd6fcf60, type: 2}

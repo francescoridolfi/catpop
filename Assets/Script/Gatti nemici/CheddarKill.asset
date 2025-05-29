@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: CheddarKill
   frontSprite: {fileID: 1324512134, guid: 475f9453c8685a740a3a7897e395c32e, type: 3}
-  maxHp: 100
-  attack: 100
-  defense: 100
+  maxHp: 230
+  attack: 75
+  defense: 45
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 91a194f21f6c4c345b03406ffd6fcf60, type: 2}
   - moveBase: {fileID: 11400000, guid: 2dce027f3c7c628478e81e5cabb22b4c, type: 2}

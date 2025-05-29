@@ -23,7 +23,10 @@ public class GameController : MonoBehaviour
         [SerializeField] GameObject pauseButton;
 
         [SerializeField] VideoPlayer faintedVideoPlayer;
+
+        [SerializeField] VideoPlayer victoryVideoPlayer;
         GameState state;
+        
         
         
 
@@ -67,15 +70,24 @@ public class GameController : MonoBehaviour
             worldCamera.gameObject.SetActive(true);
             worldDialogBox.gameObject.SetActive(false);
 
+            playerController.EnemyDefeated();
+
             if (isOver)
             {
-                joyStick.gameObject.SetActive(true);
-                pauseButton.gameObject.SetActive(true);
-                playerController.hasWin = true;
+                if (!playerController.hasNearbyInteractable())
+                {
+                    victoryVideoPlayer.loopPointReached += OnFaintedVideoFinished;
+                    victoryVideoPlayer.gameObject.SetActive(true);
+                    victoryVideoPlayer.Play();
+                }
+                else
+                {
+                    joyStick.gameObject.SetActive(true);
+                    pauseButton.gameObject.SetActive(true);
+                }
             }
             else
             {
-                playerController.hasWin = true;
                 faintedVideoPlayer.loopPointReached += OnFaintedVideoFinished;
                 faintedVideoPlayer.gameObject.SetActive(true);
                 faintedVideoPlayer.Play();
