@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
         [SerializeField] VideoPlayer faintedVideoPlayer;
 
         [SerializeField] VideoPlayer victoryVideoPlayer;
+
+        [SerializeField] AudioSource backgroundMusic;
         GameState state;
         
         
@@ -76,6 +78,7 @@ public class GameController : MonoBehaviour
             {
                 if (!playerController.hasNearbyInteractable())
                 {
+                    backgroundMusic.Stop();
                     victoryVideoPlayer.loopPointReached += OnFaintedVideoFinished;
                     victoryVideoPlayer.gameObject.SetActive(true);
                     victoryVideoPlayer.Play();
@@ -122,9 +125,6 @@ public class GameController : MonoBehaviour
             DialogManager.Instance.HandleUpdate();
 
         }
-        else if (state == GameState.Battle)
-        {
-            battleSystem.HandleUpdate();
-        }
+
     }
 }

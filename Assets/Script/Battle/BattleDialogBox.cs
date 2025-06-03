@@ -66,15 +66,4 @@ public class BattleDialogBox : MonoBehaviour
                 moveButtons[i].GetComponentInChildren<Text>().text = "-";
         }
     }
-
-    public void UpdateMoveSelection(int currentMove)
-    {
-        for (int i = 0; i < moveButtons.Count; ++i)
-        {
-            if (i == currentMove)
-                moveButtons[i].GetComponentInChildren<Text>().color = Color.yellow;
-            else
-                moveButtons[i].GetComponentInChildren<Text>().color = Color.black;
-        }
-    }
 }

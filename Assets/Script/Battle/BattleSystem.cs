@@ -52,7 +52,6 @@ public class BattleSystem : MonoBehaviour
 
             currentMove = moveIndex;
 
-            dialogBox.UpdateMoveSelection(currentMove);
             dialogBox.EnableMoveSelector(false);
             dialogBox.EnableDialogText(true);
 
@@ -63,7 +62,7 @@ public class BattleSystem : MonoBehaviour
     {
         if(state == BattleState.PlayerMove)
         {
-            HandleMoveSelection();
+            // Do Nothing, waiting for player input
         }
     }
 
@@ -86,7 +85,7 @@ public class BattleSystem : MonoBehaviour
 
         isPerformingAction = true;
         var move = playerUnit.gatto.Moves[currentMove];
-        yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} usa {move.Base.name}");
+        yield return dialogBox.TypeDialog($"{playerUnit.gatto.Name} usa {move.Base.Name}");
 
         yield return new WaitForSeconds(1f);
 
@@ -144,7 +143,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator EnemyMove() {
         state = BattleState.EnemyMove;
         var move = enemyUnit.gatto.GetRandomMove();
-        yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} usa {move.Base.name}");
+        yield return dialogBox.TypeDialog($"{enemyUnit.gatto.Name} usa {move.Base.Name}");
         yield return new WaitForSeconds(1f);
 
         if (move.Base.IsAttack) {
@@ -189,14 +188,7 @@ public class BattleSystem : MonoBehaviour
             PlayerMove();
         }
     }
-   
-    void HandleMoveSelection()    
-    {
 
-        
-        
-
-    }
 
 
     
