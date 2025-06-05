@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc4ea8e68d9cf74b910dfd111612262, type: 3}
   m_Name: Raggio Distrattore
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Raggio Distrattore
   description: 
   power: 70
   moveType: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfc4ea8e68d9cf74b910dfd111612262, type: 3}
   m_Name: "Nodo dell\u2019Anima"
   m_EditorClassIdentifier: 
-  _name: 
+  _name: Nodo dell'Anima
   description: 
   power: 90
   moveType: 1

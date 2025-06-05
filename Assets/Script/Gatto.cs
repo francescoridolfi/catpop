@@ -10,27 +10,35 @@ public class Gatto : MonoBehaviour
 
   public int HP { get; set; }
 
-  public int MaxHp {
+  private int _attack;
+  private int _defense;
+  
+
+  public int MaxHp
+  {
     get { return this.gattoStats.MaxHp; }
   }
 
   public int Attack
   {
-    get { return this.gattoStats.Attack; }
-    set { this.gattoStats.Attack = value; }
+    get { return this._attack; }
+    set { this._attack = value; }
   }
 
   public int Defense
   {
-    get { return this.gattoStats.Defense; }
-    set { this.gattoStats.Defense = value; }
+    get { return this._defense; }
+    set { this._defense = value; }
   }
 
+  
   public List<Move> Moves { get; set; }
 
   public Gatto(GattoStats gattoStats) {
     this.gattoStats = gattoStats;
     HP = gattoStats.MaxHp;
+    _attack = gattoStats.Attack;
+    _defense = gattoStats.Defense;
 
     Moves = new List<Move>();
 

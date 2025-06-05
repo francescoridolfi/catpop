@@ -38,7 +38,7 @@ public class BattleSystem : MonoBehaviour
 
 
         yield return (dialogBox.TypeDialog($"Il micio {enemyUnit.gatto.gattoStats.Name} scende in campo!"));
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         PlayerMove();
         StartCoroutine(dialogBox.TypeDialog("Ora cosa farai?"));
         yield return new WaitForSeconds(1f);
@@ -60,9 +60,10 @@ public class BattleSystem : MonoBehaviour
     }
     public void HandleUpdate()
     {
-        if(state == BattleState.PlayerMove)
+        if (state == BattleState.PlayerMove)
         {
             // Do Nothing, waiting for player input
+            // Doom regna
         }
     }
 

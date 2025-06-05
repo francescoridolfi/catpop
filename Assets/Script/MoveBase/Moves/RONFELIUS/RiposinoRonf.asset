@@ -15,6 +15,6 @@ MonoBehaviour:
   _name: Ronf Ronf
   description: 
   power: 40
-  isRegen: 1
+  moveType: 0
   accuracy: 0
   image: {fileID: 0}
